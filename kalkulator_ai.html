@@ -5,42 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator AI</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Kalkulator AI</h1>
-        <button id="premiumButton">Beli Premium</button>
-    </header>
-    <main>
-        <div id="chat">
-            <div class="userMessage">
-                <img src="path/to/image.jpg" alt="Image preview" class="imagePreview" />
-                <p>User message</p>
-            </div>
+    <h1>Kalkulator AI</h1>
+    <div id="image-preview-container">
+        <img id="image-preview" src="" alt="Image Preview" style="display:none;">
+    </div>
+    <button id="premium-button">Upgrade to Premium</button>
+    <div id="premium-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Premium Features</h2>
+            <p>Upgrade to premium to access exclusive features!</p>
+            <button id="confirm-upgrade">Confirm Upgrade</button>
         </div>
-        <div id="modal" style="display:none;">
-            <h2>Premium Payment</h2>
-            <form id="paymentForm">
-                <label for="cardDetails">Card Details:</label>
-                <input type="text" id="cardDetails" required>
-                <button type="submit">Pay Now</button>
-            </form>
-        </div>
-    </main>
+    </div>
     <script>
-        // Mock API endpoints
-        const chatApi = "/api/chat";
-        const imageApi = "/api/image";
+        // Functionality for image preview
+        const imagePreview = document.getElementById('image-preview');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
 
-        document.getElementById('premiumButton').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'block';
+        function showImagePreview(imageUrl) {
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
+        }
+
+        // Premium button functionality
+        const premiumButton = document.getElementById('premium-button');
+        const premiumModal = document.getElementById('premium-modal');
+        const closeButton = document.querySelector('.close-button');
+
+        premiumButton.addEventListener('click', () => {
+            premiumModal.style.display = 'block';
         });
 
-        const paymentForm = document.getElementById('paymentForm');
-        paymentForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Handle payment logic
+        closeButton.addEventListener('click', () => {
+            premiumModal.style.display = 'none';
         });
+
+        // Example API endpoint
+        async function fetchData() {
+            try {
+                const response = await fetch('https://api.example.com/data');
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchData();
     </script>
 </body>
 </html>
