@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI System Loading</title>
+    <style>
+        /* Gaya Dasar */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Kontainer Utama */
+        .loader-container {
+            text-align: center;
+        }
+
+        /* Animasi Ring Orbit */
+        .orbit {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(0, 242, 255, 0.1);
+            border-radius: 50%;
+            margin-bottom: 30px;
+        }
+
+        .orbit::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 15px;
+            height: 15px;
+            background: #00f2ff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00f2ff, 0 0 40px #00f2ff;
+            animation: rotate 2s linear infinite;
+            transform-origin: 0 80px;
+        }
+
+        /* Teks Futuristik */
+        .status-text {
+            color: #00f2ff;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            animation: blink 1.5s infinite;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            background: #00f2ff;
+            box-shadow: 0 0 10px #00f2ff;
+            animation: fillProgress 3s forwards;
+        }
+
+        /* Keyframes Animasi */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loader-container">
+        <div class="orbit"></div>
+        <div class="status-text">Initializing AI</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        // Logika untuk pindah halaman setelah 3 detik
+        setTimeout(() => {
+            window.location.href = 'kalkulator_ai.html';
+        }, 3500); // 3.5 detik supaya animasi progress bar selesai dulu
+    </script>
+
+</body>
+</html>

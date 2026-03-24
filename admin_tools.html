@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Real Time Activator</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 40px; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 15px; margin: 20px 0; border: 2px solid #eee; border-radius: 12px; font-size: 18px; text-align: center; font-weight: bold; text-transform: uppercase; }
+        button { width: 100%; padding: 15px; background: #0b57d0; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .log { margin-top: 15px; color: #059669; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Admin Activator 🚀</h2>
+    <p>Masukkan ID User dari WhatsApp</p>
+    <input type="text" id="targetId" placeholder="CONTOH: MATH-A1B2C3">
+    <button onclick="aktifkanSekarang()">AKTIFKAN PREMIUM</button>
+    <div id="statusLog" class="log">✅ USER BERHASIL DI-UPGRADE!</div>
+</div>
+
+<script>
+    function aktifkanSekarang() {
+        const id = document.getElementById('targetId').value.trim().toUpperCase();
+        if(!id) return alert("ID tidak boleh kosong!");
+
+        // AMBIL DATABASE GLOBAL DARI STORAGE
+        let db = JSON.parse(localStorage.getItem('global_premium_db') || "[]");
+        
+        if(!db.includes(id)) {
+            db.push(id);
+            // SIMPAN KEMBALI KE STORAGE
+            localStorage.setItem('global_premium_db', JSON.stringify(db));
+            
+            // TRIGGER EVENT AGAR TAB LAIN TAHU (PENTING!)
+            localStorage.setItem('admin_signal', Date.now()); 
+
+            document.getElementById('statusLog').style.display = 'block';
+            alert(`Sinyal Aktif Terkirim ke ID: ${id}`);
+            document.getElementById('targetId').value = "";
+        } else {
+            alert("User ini sudah Premium!");
+        }
+    }
+</script>
+</body>
+</html>
